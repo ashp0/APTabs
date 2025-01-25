@@ -6,14 +6,28 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EDC868072D458A340084A68B /* license in Resources */ = {isa = PBXBuildFile; fileRef = EDC868062D458A320084A68B /* license */; };
+		EDC868092D458A3C0084A68B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EDC868082D458A390084A68B /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		EDC867E52D45858A0084A68B /* APTab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APTab.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDC868062D458A320084A68B /* license */ = {isa = PBXFileReference; lastKnownFileType = text; path = license; sourceTree = "<group>"; };
+		EDC868082D458A390084A68B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EDC8680B2D458AB60084A68B /* ChromeStyleTabs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChromeStyleTabs.png; sourceTree = "<group>"; };
+		EDC8680C2D458AE60084A68B /* SafariStyleTabs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SafariStyleTabs.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		EDC867E72D45858A0084A68B /* APTab */ = {
+		EDC867E72D45858A0084A68B /* APTabExample */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = APTab;
+			path = APTabExample;
+			sourceTree = "<group>";
+		};
+		EDC867FC2D4585910084A68B /* APTabs */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = APTabs;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,8 +46,12 @@
 		EDC867DC2D45858A0084A68B = {
 			isa = PBXGroup;
 			children = (
-				EDC867E72D45858A0084A68B /* APTab */,
+				EDC8680A2D458AA20084A68B /* Assets */,
+				EDC868082D458A390084A68B /* README.md */,
+				EDC868062D458A320084A68B /* license */,
+				EDC867E72D45858A0084A68B /* APTabExample */,
 				EDC867E62D45858A0084A68B /* Products */,
+				EDC867FC2D4585910084A68B /* APTabs */,
 			);
 			sourceTree = "<group>";
 		};
@@ -43,6 +61,15 @@
 				EDC867E52D45858A0084A68B /* APTab.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EDC8680A2D458AA20084A68B /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				EDC8680B2D458AB60084A68B /* ChromeStyleTabs.png */,
+				EDC8680C2D458AE60084A68B /* SafariStyleTabs.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -61,7 +88,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				EDC867E72D45858A0084A68B /* APTab */,
+				EDC867E72D45858A0084A68B /* APTabExample */,
+				EDC867FC2D4585910084A68B /* APTabs */,
 			);
 			name = APTab;
 			packageProductDependencies = (
@@ -109,6 +137,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDC868072D458A340084A68B /* license in Resources */,
+				EDC868092D458A3C0084A68B /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,7 +278,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = APTab/APTab.entitlements;
+				CODE_SIGN_ENTITLEMENTS = APTabExample/APTabExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -275,7 +305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = APTab/APTab.entitlements;
+				CODE_SIGN_ENTITLEMENTS = APTabExample/APTabExample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
