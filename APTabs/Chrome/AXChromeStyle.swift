@@ -9,7 +9,7 @@ import AppKit
 import Cocoa
 
 public final class ChromeTabStyle: AXTabStyler {
-    public func createsButton(isSelected: Bool, animated: Bool) -> AXTabButton {
+    public func createsButton(isSelected: Bool) -> AXTabButton {
 
         let button = ChromeTabButton()
         button.isSelected = isSelected
@@ -84,35 +84,14 @@ public final class ChromeTabButton: AXTabButton {
         // Start at the bottom-left corner
         path.move(to: CGPoint(x: 0, y: bounds.height))
 
-        // Draw left border UP to start of top-left rounded corner
+        // Bottom left
         path.addLine(to: CGPoint(x: 0, y: 0))
-
-        // Top-left rounded corner (clockwise arc)
-        //        path.addArc(
-        //            center: CGPoint(x: cornerRadius, y: cornerRadius),
-        //            radius: cornerRadius,
-        //            startAngle: .pi,
-        //            endAngle: .pi,
-        //            clockwise: false
-        //        )
-        //
-        //        // Top border (left to right)
+        
+        // Top
         path.addLine(to: CGPoint(x: bounds.width, y: 0))
-        //
-        //        // Top-right rounded corner (clockwise arc)
-        //        path.addArc(
-        //            center: CGPoint(x: bounds.width - cornerRadius, y: cornerRadius),
-        //            radius: cornerRadius,
-        //            startAngle: .pi / 2,
-        //            endAngle: 0,
-        //            clockwise: true
-        //        )
-        //
-        //        // Draw right border DOWN to bottom-right corner
+        
+        // Bottom right
         path.addLine(to: CGPoint(x: bounds.width, y: bounds.height))
-        //
-        //        // Connect back to the bottom-left corner
-        //        path.addLine(to: CGPoint(x: 0, y: bounds.height))
 
         borderLayer.path = path
     }

@@ -8,7 +8,7 @@
 import Cocoa
 
 public protocol AXTabStyler: AnyObject {
-    func createsButton(isSelected: Bool, animated: Bool) -> AXTabButton
+    func createsButton(isSelected: Bool) -> AXTabButton
     func layoutTabView(_ tabView: AXTabView)
     var tabButtonSpacing: CGFloat { get }
     var contentInsets: NSEdgeInsets { get }

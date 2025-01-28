@@ -17,15 +17,19 @@ public class AXTabButton: NSControl {
     public var isSelected = false
     public var title: String = "" { didSet { titleLabel.stringValue = title } }
     public var icon: NSImage? { didSet { iconView.image = icon } }
+    weak var tabItem: NSTabViewItem?
 
     private let titleLabel = NSTextField(labelWithString: "")
     private let iconView = NSImageView()
     private let closeButton = NSButton()
+    
+    var trackingArea: NSTrackingArea!
+    private var dragStartPoint: NSPoint?
 
     public override init(frame: NSRect) {
         super.init(frame: frame)
         setupUI()
-        //setupTracking()
+        setupTracking()
     }
 
     required init?(coder: NSCoder) {
@@ -81,8 +85,8 @@ public class AXTabButton: NSControl {
         ])
     }
 
-    private func setupTracking() {
-        let trackingArea = NSTrackingArea(
+    internal func setupTracking() {
+        self.trackingArea = NSTrackingArea(
             rect: bounds,
             options: [.activeAlways, .mouseEnteredAndExited],
             owner: self,
@@ -90,9 +94,13 @@ public class AXTabButton: NSControl {
         )
         addTrackingArea(trackingArea)
     }
-
-    public override func updateTrackingAreas() {
-        super.updateTrackingAreas()
+    
+    public override func layout() {
+        super.layout()
+        
+        if let trackingArea {
+            removeTrackingArea(trackingArea)
+        }
         setupTracking()
     }
 
@@ -114,6 +122,46 @@ public class AXTabButton: NSControl {
     }
 
     public override func mouseDown(with event: NSEvent) {
+        dragStartPoint = convert(event.locationInWindow, from: nil)
         delegate?.tabButtonClicked(self)
+    }
+    
+    public override func mouseDragged(with event: NSEvent) {
+            guard let dragStartPoint = dragStartPoint else { return }
+            let currentPoint = convert(event.locationInWindow, from: nil)
+            let distance = hypot(currentPoint.x - dragStartPoint.x, currentPoint.y - dragStartPoint.y)
+            
+            if distance > 3 {
+                let pasteboardItem = NSPasteboardItem()
+                pasteboardItem.setString(String(self.tag), forType: .string)
+                
+                if self.tag == -1 {
+                    print("NEGATIVE 1111111: \(self.title)")
+                }
+                
+                let draggingItem = NSDraggingItem(pasteboardWriter: pasteboardItem)
+                draggingItem.setDraggingFrame(self.bounds, contents: self.snapshot())
+                
+                beginDraggingSession(with: [draggingItem], event: event, source: self)
+                self.dragStartPoint = nil
+            }
+        }
+
+        private func snapshot() -> NSImage {
+            return NSImage(data: dataWithPDF(inside: bounds))!
+        }
+}
+
+extension AXTabButton: NSDraggingSource {
+    public func draggingSession(_ session: NSDraggingSession, sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation {
+        return .move
+    }
+
+    public func draggingSession(_ session: NSDraggingSession, willBeginAt screenPoint: NSPoint) {
+        self.isHidden = true
+    }
+
+    public func draggingSession(_ session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
+        self.isHidden = false
     }
 }
